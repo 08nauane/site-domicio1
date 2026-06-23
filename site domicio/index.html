@@ -1,9 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Marmitaria Sabor Caseiro</title>
+
+<meta name="description" content="Marmitas caseiras com entrega rápida. Monte sua marmita personalizada e receba em casa.">
+
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,7 +16,7 @@
 <header>
     <div class="logo">🍱 Marmitaria Sabor Caseiro</div>
 
-    <nav>
+    <nav aria-label="Menu principal">
         <a href="index.html">Início</a>
         <a href="montar.html">Monte Sua Marmita</a>
         <a href="cadastro.html">Cadastro</a>
@@ -23,6 +28,8 @@
     <p>Qualidade, sabor e entrega rápida.</p>
     <a href="montar.html" class="btn">Montar Marmita</a>
 </section>
+
+<main>
 
 <section class="titulo">
     <h2>Nossos Tamanhos</h2>
@@ -43,7 +50,9 @@
             <li>Salada simples</li>
         </ul>
 
-        <button>Comprar</button>
+        <button onclick="escolherMarmita('Marmita P')">
+            Comprar
+        </button>
     </div>
 
     <div class="card">
@@ -59,7 +68,9 @@
             <li>Salada completa</li>
         </ul>
 
-        <button>Comprar</button>
+        <button onclick="escolherMarmita('Marmita M')">
+            Comprar
+        </button>
     </div>
 
     <div class="card">
@@ -75,38 +86,62 @@
             <li>Salada completa</li>
         </ul>
 
-        <button>Comprar</button>
+        <button onclick="escolherMarmita('Marmita G')">
+            Comprar
+        </button>
     </div>
 
 </section>
 
 <section class="info">
 
-<h2>Proteínas Disponíveis</h2>
+    <h2>Proteínas Disponíveis</h2>
 
-<div class="lista">
-    <span>Frango Grelhado</span>
-    <span>Bife Acebolado</span>
-    <span>Carne Assada</span>
-    <span>Linguiça Toscana</span>
-    <span>Filé de Frango Empanado</span>
-</div>
+    <div class="lista">
+        <span>Frango Grelhado</span>
+        <span>Bife Acebolado</span>
+        <span>Carne Assada</span>
+        <span>Linguiça Toscana</span>
+        <span>Filé de Frango Empanado</span>
+    </div>
 
-<h2>Acompanhamentos</h2>
+    <h2>Acompanhamentos</h2>
 
-<div class="lista">
-    <span>Batata Frita</span>
-    <span>Purê de Batata</span>
-    <span>Macarrão</span>
-    <span>Farofa</span>
-    <span>Legumes Refogados</span>
-</div>
+    <div class="lista">
+        <span>Batata Frita</span>
+        <span>Purê de Batata</span>
+        <span>Macarrão</span>
+        <span>Farofa</span>
+        <span>Legumes Refogados</span>
+    </div>
 
 </section>
 
+<section class="beneficios">
+
+    <h2>Por que escolher nossa marmitaria?</h2>
+
+    <div class="lista">
+        <span>✅ Ingredientes frescos</span>
+        <span>✅ Entrega rápida</span>
+        <span>✅ Preço acessível</span>
+        <span>✅ Comida feita diariamente</span>
+    </div>
+
+</section>
+
+</main>
+
 <footer>
     <p>© 2026 Marmitaria Sabor Caseiro</p>
+    <p>WhatsApp: (45) 99839-1497</p>
+    <p>Endereço: Rua Carlos Sbaraini, 3737
+    </p>
 </footer>
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
+
