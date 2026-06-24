@@ -22,7 +22,7 @@
 
 <h1>Cadastro de Cliente</h1>
 
-<form>
+<form onsubmit="irPagamento(event)">
 
 <input type="text" placeholder="Nome Completo">
 
@@ -36,11 +36,20 @@
 
 <input type="password" placeholder="Confirmar Senha">
 
-<button>Cadastrar</button>
+<button type="submit">Cadastrar</button>
 
 </form>
 
 </section>
+
+<script>
+
+function irPagamento(event){
+    event.preventDefault();
+    window.location.href = "pagamento.html";
+}
+
+</script>
 
 <script src="script.js"></script>
 
