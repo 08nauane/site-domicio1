@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrinho - Marmitaria Sabor Caseiro</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f5f5f5;
+    margin:0;
+}
+
+header{
+    background:#ff6b35;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+main{
+    max-width:900px;
+    margin:30px auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    border-bottom:1px solid #ddd;
+    padding:12px;
+    text-align:left;
+}
+
+th{
+    background:#f0f0f0;
+}
+
+.total{
+    text-align:right;
+    margin-top:20px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+button{
+    background:#ff6b35;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-top:20px;
+}
+
+button:hover{
+    background:#e65a28;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+<h1>🛒 Carrinho de Compras</h1>
+</header>
+
+<main>
+
+<table>
+<thead>
+<tr>
+<th>Pedido</th>
+<th>Preço</th>
+</tr>
+</thead>
+
+<tbody id="listaPedidos">
+
+</tbody>
+
+</table>
+
+<div class="total">
+<p>Subtotal: <span id="subtotal">R$ 0,00</span></p>
+<p>Taxa de entrega: <span id="entrega">R$ 8,00</span></p>
+<p>Total: <span id="total">R$ 0,00</span></p>
+</div>
+
+
+<button onclick="finalizarPedido()" class="btn-finalizar">
+    Finalizar Pedido
+</button>
+
+<button onclick="esvaziarCarrinho()" class="btn-limpar">
+    Esvaziar Carrinho
+</button>
+
+</main>
+
+<script>
+
+const taxaEntrega = 8;
+
+let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+let tabela = document.getElementById("listaPedidos");
+
+let subtotal = 0;
+
+pedidos.forEach(item=>{
+
+subtotal += item.preco;
+
+tabela.innerHTML += `
+<tr>
+<td>${item.nome}</td>
+<td>R$ ${item.preco.toFixed(2)}</td>
+</tr>
+`;
+
+});
+
+document.getElementById("subtotal").innerHTML =
+"R$ " + subtotal.toFixed(2);
+
+document.getElementById("total").innerHTML =
+"R$ " + (subtotal + taxaEntrega).toFixed(2);
+
+function finalizarPedido(){
+
+if(pedidos.length==0){
+alert("Seu carrinho está vazio.");
+return;
+}
+
+alert("Pedido realizado com sucesso!");
+
+localStorage.removeItem("pedidos");
+
+location.reload();
+
+}
+
+</script>
+
+</body>
+</html>

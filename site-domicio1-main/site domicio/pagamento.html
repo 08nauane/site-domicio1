@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Forma de Pagamento</title>
+
+<style>
+body{
+    font-family:Arial, sans-serif;
+    background:#f4f4f4;
+    margin:0;
+}
+
+header{
+    background:#ff7a00;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.container{
+    max-width:800px;
+    margin:30px auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+.opcao{
+    margin:15px 0;
+    padding:15px;
+    border:1px solid #ddd;
+    border-radius:8px;
+}
+
+.pix-area{
+    display:none;
+    margin-top:20px;
+    text-align:center;
+    padding:20px;
+    background:#f8f8f8;
+    border-radius:10px;
+}
+
+.pix-area img{
+    width:250px;
+}
+
+.codigo{
+    background:#eee;
+    padding:10px;
+    margin-top:10px;
+    word-break:break-all;
+    border-radius:5px;
+}
+
+button{
+    background:#ff7a00;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:5px;
+    cursor:pointer;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+    <h1>Escolha a Forma de Pagamento</h1>
+</header>
+
+<div class="container">
+
+<div class="opcao">
+    <input type="radio" name="pagamento" value="pix" onchange="mostrarPix()">
+    PIX
+</div>
+
+<div class="opcao">
+    <input type="radio" name="pagamento">
+    Cartão de Crédito
+</div>
+
+<div class="opcao">
+    <input type="radio" name="pagamento">
+    Boleto Bancário
+</div>
+
+<div class="opcao">
+    <input type="radio" name="pagamento">
+    Retirada na Loja (Pagamento no Local)
+</div>
+
+<div class="pix-area" id="pixArea">
+
+<h2>Pagamento via PIX</h2>
+
+<img
+src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=PIX-MARMITARIA-SABOR-CASEIRO"
+alt="QR Code PIX">
+
+<p>Escaneie o QR Code ou copie o código abaixo:</p>
+
+<div class="codigo" id="codigoPix">
+00020126580014BR.GOV.BCB.PIX0136pix@marmitaria.com5204000053039865802BR5925MARMITARIA SABOR CASEIRO6009CASCAVEL62070503***6304ABCD
+</div>
+
+<button onclick="copiarPix()">
+Copiar Código PIX
+</button>
+<br><br>
+
+<button onclick="confirmarPagamento()">
+Já realizei o pagamento
+</button>
+
+<div id="mensagemPagamento"></div>
+
+</div>
+
+</div>
+
+<script>
+function confirmarPagamento(){
+
+    document.getElementById("mensagemPagamento").innerHTML = `
+        <div style="
+            margin-top:20px;
+            padding:15px;
+            background:#d4edda;
+            color:#155724;
+            border-radius:8px;
+            font-weight:bold;">
+            ✅ Pagamento informado com sucesso!<br>
+            Sua solicitação foi enviada para análise.<br>
+            Após a confirmação do PIX, seu pedido será preparado.
+        </div>
+    `;
+}
+
+function mostrarPix(){
+    document.getElementById("pixArea").style.display="block";
+}
+
+function copiarPix(){
+
+    let texto =
+    document.getElementById("codigoPix").innerText;
+
+    navigator.clipboard.writeText(texto);
+
+    alert("Código PIX copiado!");
+}
+
+</script>
+
+</body>
+</html>
+```
