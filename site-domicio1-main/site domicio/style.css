@@ -167,14 +167,14 @@ border-radius:5px;
 }
 
 button{
-width:100%;
-padding:15px;
-background:#ff6b00;
-color:white;
-border:none;
-border-radius:5px;
-cursor:pointer;
-font-size:16px;
+    background:#ff6b35;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-top:20px;
+    font-size:14px;
 }
 
 footer{
@@ -204,6 +204,7 @@ align-items:center;
 width:90%;
 }
 
+}
 
 /* Botão finalizar pedido */
 .btn-finalizar{
@@ -236,6 +237,71 @@ width:90%;
     margin-top:10px;
 }
 
+.btn-quantidade{
+    background:#ff6b00;
+    color:white;
+    border:none;
+    width:22px;
+    height:22px;
+    padding:0;
+    border-radius:50%;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+    margin:0 4px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    transition:0.2s;
+}
 
+.btn-quantidade:hover{
+    background:#e65a28;
+    transform:scale(1.1);
+}
 
+.btn-quantidade{
+    background:white;
+    color:#ff6b00;
+    border:1px solid #ff6b00;
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* Botões pequenos do carrinho */
+.carrinho button{
+    width:auto;
+    padding:5px 10px;
+    font-size:14px;
+    border-radius:8px;
+}
+
+/* Botões + e - */
+.carrinho .btn-quantidade{
+    width:24px;
+    height:24px;
+    padding:0;
+    font-size:14px;
+    border-radius:50%;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* Botão finalizar */
+.carrinho .btn-finalizar{
+    width:100%;
+    padding:10px;
+    font-size:14px;
+}
+
+/* Botão limpar */
+.carrinho .btn-limpar{
+    width:100%;
+    padding:10px;
+    font-size:14px;
 }

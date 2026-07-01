@@ -14,20 +14,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // ESCOLHER TAMANHO DA MARMITA
     // ============================
 
-    window.escolherMarmita = function (tamanho) {
+   window.escolherMarmita = function (tamanho) {
 
-        localStorage.setItem("tamanhoMarmita", tamanho);
+    localStorage.setItem("tamanhoMarmita", tamanho);
 
-        let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+    window.location.href = "montar.html";
 
-        pedidos.push({
-            nome: tamanho,
-            preco: precos[tamanho]
-        });
 
-        localStorage.setItem("pedidos", JSON.stringify(pedidos));
-
-        window.location.href = "montar.html";
     };
 
     // ============================
@@ -87,6 +80,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
            // Adiciona a marmita personalizada ao carrinho
 let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+const quantidade = parseInt(document.getElementById("quantidade").value);
 
 pedidos.push({
     nome: campos[0].value,
@@ -208,12 +203,23 @@ if (document.title === "Cadastro") {
 
             subtotal += item.preco;
 
-            tabela.innerHTML += `
-                <tr>
-                    <td>${item.nome}</td>
-                    <td>R$ ${item.preco.toFixed(2)}</td>
-                </tr>
-            `;
+           tabela.innerHTML += `
+<tr>
+    <td>${item.nome}</td>
+
+    <td>
+        <button class="btn-quantidade" onclick="diminuir(${index})">−</button>
+
+        ${item.quantidade || 1}
+
+        <button class="btn-quantidade" onclick="aumentar(${index})">+</button>
+    </td>
+
+    <td>
+        R$ ${(item.preco * (item.quantidade || 1)).toFixed(2)}
+    </td>
+</tr>
+`;
 
         });
 

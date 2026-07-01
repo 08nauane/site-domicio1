@@ -6,6 +6,7 @@
 <title>Monte Sua Marmita</title>
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header>
@@ -20,76 +21,100 @@
 
 </header>
 
+
 <section class="formulario">
 
 <h1>Monte Sua Marmita</h1>
 
 <form>
 
+
 <label for="tamanho">Tamanho</label>
 
 <select id="tamanho">
-<option>Marmita P</option>
-<option>Marmita M</option>
-<option>Marmita G</option>
+    <option>Marmita P</option>
+    <option>Marmita M</option>
+    <option>Marmita G</option>
 </select>
+
 
 <label for="arroz">Tipo de Arroz</label>
 
 <select id="arroz">
-<option>Arroz Branco</option>
-<option>Arroz Integral</option>
+    <option>Arroz Branco</option>
+    <option>Arroz Integral</option>
 </select>
+
 
 <label for="proteina1">Proteína 1</label>
 
 <select id="proteina1">
-<option>Frango Grelhado</option>
-<option>Bife Acebolado</option>
-<option>Carne Assada</option>
-<option>Linguiça Toscana</option>
+    <option>Frango Grelhado</option>
+    <option>Bife Acebolado</option>
+    <option>Carne Assada</option>
+    <option>Linguiça Toscana</option>
 </select>
+
 
 <label for="proteina2">Proteína 2</label>
 
 <select id="proteina2">
-<option>Frango Grelhado</option>
-<option>Bife Acebolado</option>
-<option>Carne Assada</option>
-<option>Linguiça Toscana</option>
+    <option>Frango Grelhado</option>
+    <option>Bife Acebolado</option>
+    <option>Carne Assada</option>
+    <option>Linguiça Toscana</option>
 </select>
+
 
 <label for="acompanhamento">Acompanhamento</label>
 
 <select id="acompanhamento">
-<option>Batata Frita</option>
-<option>Purê de Batata</option>
-<option>Macarrão</option>
-<option>Farofa</option>
-<option>Legumes Refogados</option>
+    <option>Batata Frita</option>
+    <option>Purê de Batata</option>
+    <option>Macarrão</option>
+    <option>Farofa</option>
+    <option>Legumes Refogados</option>
 </select>
+
 
 <label for="salada">Salada</label>
 
 <select id="salada">
-<option>Alface e Tomate</option>
-<option>Alface, Cenoura e Beterraba</option>
-<option>Mix de Folhas</option>
+    <option>Alface e Tomate</option>
+    <option>Alface, Cenoura e Beterraba</option>
+    <option>Mix de Folhas</option>
 </select>
+
 
 <label for="observacao">Observações</label>
 
 <textarea
 id="observacao"
-placeholder="Ex.: sem cebola"></textarea>
+placeholder="Ex.: sem cebola">
+</textarea>
+
+
+<label for="quantidade">
+Quantidade de Marmitas
+</label>
+
+<input 
+type="number"
+id="quantidade"
+value="1"
+min="1"
+max="50">
+
 
 <button type="submit">
 Adicionar ao Carrinho
 </button>
 
+
 </form>
 
 </section>
+
 
 <script src="script.js"></script>
 

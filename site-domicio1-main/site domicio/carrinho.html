@@ -80,6 +80,7 @@ button:hover{
 <thead>
 <tr>
 <th>Pedido</th>
+<th>Quantidade</th>
 <th>Preço</th>
 </tr>
 </thead>
@@ -115,42 +116,115 @@ let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 
 let tabela = document.getElementById("listaPedidos");
 
-let subtotal = 0;
 
-pedidos.forEach(item=>{
+function atualizarCarrinho(){
 
-subtotal += item.preco;
+    tabela.innerHTML = "";
 
-tabela.innerHTML += `
-<tr>
-<td>${item.nome}</td>
-<td>R$ ${item.preco.toFixed(2)}</td>
-</tr>
-`;
+    let subtotal = 0;
 
-});
 
-document.getElementById("subtotal").innerHTML =
-"R$ " + subtotal.toFixed(2);
+    pedidos.forEach((item, index)=>{
 
-document.getElementById("total").innerHTML =
-"R$ " + (subtotal + taxaEntrega).toFixed(2);
+        if(!item.quantidade){
+            item.quantidade = 1;
+        }
+
+        let totalItem = item.preco * item.quantidade;
+
+        subtotal += totalItem;
+
+
+        tabela.innerHTML += `
+        <tr>
+
+            <td>${item.nome}</td>
+
+            <td>
+                <button onclick="diminuir(${index})">−</button>
+
+                ${item.quantidade}
+
+                <button onclick="aumentar(${index})">+</button>
+            </td>
+
+            <td>
+                R$ ${totalItem.toFixed(2)}
+            </td>
+
+        </tr>
+        `;
+
+    });
+
+
+    document.getElementById("subtotal").innerHTML =
+    "R$ " + subtotal.toFixed(2);
+
+
+    document.getElementById("total").innerHTML =
+    "R$ " + (subtotal + taxaEntrega).toFixed(2);
+
+
+    localStorage.setItem(
+        "pedidos",
+        JSON.stringify(pedidos)
+    );
+
+}
+
+
+function aumentar(index){
+
+    pedidos[index].quantidade++;
+
+    atualizarCarrinho();
+
+}
+
+
+
+function diminuir(index){
+
+    if(pedidos[index].quantidade > 1){
+
+        pedidos[index].quantidade--;
+
+    }
+
+    atualizarCarrinho();
+
+}
+
+
 
 function finalizarPedido(){
 
-if(pedidos.length==0){
-alert("Seu carrinho está vazio.");
-return;
-}
+    if(pedidos.length == 0){
 
-alert("Pedido realizado com sucesso!");
+        alert("Seu carrinho está vazio.");
+        return;
 
-localStorage.removeItem("pedidos");
+    }
 
-location.reload();
+    window.location.href = "cadastro.html";
 
 }
 
+function esvaziarCarrinho(){
+
+    if(confirm("Deseja esvaziar o carrinho?")){
+
+        localStorage.removeItem("pedidos");
+
+        location.reload();
+
+    }
+
+}
+
+
+atualizarCarrinho();
 </script>
 
 </body>
