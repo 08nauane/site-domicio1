@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -69,6 +68,7 @@ button{
 </style>
 
 </head>
+
 <body>
 
 <header>
@@ -77,38 +77,71 @@ button{
 
 <div class="container">
 
+<!-- PIX -->
 <div class="opcao">
-    <input type="radio" name="pagamento" value="pix" onchange="mostrarPix()">
+    <input type="radio" name="pagamento" onchange="mostrarPix()">
     PIX
 </div>
 
+<!-- CARTÃO -->
 <div class="opcao">
-    <input type="radio" name="pagamento">
+    <input type="radio" name="pagamento" onchange="confirmarOpcao('Cartão de Crédito')">
     Cartão de Crédito
 </div>
 
 <div class="opcao">
-    <input type="radio" name="pagamento">
+    <input type="radio" name="pagamento" onchange="confirmarOpcao('Cartão de Débito')">
     Cartão de Débito
 </div>
 
+<!-- DINHEIRO -->
 <div class="opcao">
-    <input type="radio" name="pagamento">
+    <input type="radio" name="pagamento" onchange="mostrarDinheiro()">
     Dinheiro
+
+    <div id="dinheiroArea" style="display:none; margin-top:20px; padding:20px; background:#f8f8f8; border-radius:10px;">
+
+        <h3>Pagamento em Dinheiro</h3>
+
+        <p>Precisa de troco?</p>
+
+        <label>
+            <input type="radio" name="troco" value="sim" onchange="mostrarTroco(true)">
+            Sim
+        </label>
+
+        <label style="margin-left:20px;">
+            <input type="radio" name="troco" value="nao" onchange="mostrarTroco(false)">
+            Não
+        </label>
+
+        <div id="valorTroco" style="display:none; margin-top:15px;">
+            <label>Troco para quanto?</label><br><br>
+
+            <input type="number" id="trocoValor" placeholder="Ex.: 100,00">
+        </div>
+
+        <br>
+
+        <button onclick="confirmarDinheiro()">
+            Confirmar
+        </button>
+
+    </div>
 </div>
 
+<!-- RETIRADA -->
 <div class="opcao">
-    <input type="radio" name="pagamento">
+    <input type="radio" name="pagamento" onchange="confirmarOpcao('Retirada na Loja')">
     Retirada na Loja (Pagamento no Local)
 </div>
 
+<!-- PIX AREA -->
 <div class="pix-area" id="pixArea">
 
 <h2>Pagamento via PIX</h2>
 
-<img
-src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=PIX-MARMITARIA-SABOR-CASEIRO"
-alt="QR Code PIX">
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=PIX-MARMITARIA-SABOR-CASEIRO">
 
 <p>Escaneie o QR Code ou copie o código abaixo:</p>
 
@@ -116,9 +149,8 @@ alt="QR Code PIX">
 00020126580014BR.GOV.BCB.PIX0136pix@marmitaria.com5204000053039865802BR5925MARMITARIA SABOR CASEIRO6009CASCAVEL62070503***6304ABCD
 </div>
 
-<button onclick="copiarPix()">
-Copiar Código PIX
-</button>
+<button onclick="copiarPix()">Copiar Código PIX</button>
+
 <br><br>
 
 <button onclick="confirmarPagamento()">
@@ -129,37 +161,92 @@ Já realizei o pagamento
 
 </div>
 
+<!-- MENSAGEM GERAL -->
+<div id="mensagemConfirmacao"></div>
+
 </div>
 
 <script>
-function confirmarPagamento(){
 
-    document.getElementById("mensagemPagamento").innerHTML = `
-        <div style="
-            margin-top:20px;
-            padding:15px;
-            background:#d4edda;
-            color:#155724;
-            border-radius:8px;
-            font-weight:bold;">
-            ✅ Pagamento informado com sucesso!<br>
-            Sua solicitação foi enviada para análise.<br>
-            Após a confirmação do PIX, seu pedido será preparado.
+function esconderAreas(){
+    document.getElementById("pixArea").style.display = "none";
+    document.getElementById("dinheiroArea").style.display = "none";
+}
+
+function mostrarPix(){
+    esconderAreas();
+    document.getElementById("pixArea").style.display = "block";
+}
+
+function mostrarDinheiro(){
+    esconderAreas();
+    document.getElementById("dinheiroArea").style.display = "block";
+}
+
+function mostrarTroco(mostrar){
+    document.getElementById("valorTroco").style.display = mostrar ? "block" : "none";
+}
+
+function confirmarOpcao(opcao){
+    esconderAreas();
+
+    document.getElementById("mensagemConfirmacao").innerHTML = `
+        <div style="margin-top:20px;padding:15px;background:#d4edda;color:#155724;border-radius:8px;font-weight:bold;">
+            ✅ Forma de pagamento confirmada:<br>
+            <strong>${opcao}</strong>
         </div>
     `;
 }
 
-function mostrarPix(){
-    document.getElementById("pixArea").style.display="block";
+function confirmarDinheiro(){
+
+    let troco = document.querySelector('input[name="troco"]:checked');
+
+    if(!troco){
+        alert("Informe se precisa de troco.");
+        return;
+    }
+
+    let msg = "";
+
+    if(troco.value === "sim"){
+
+        let valor = document.getElementById("trocoValor").value;
+
+        if(valor === ""){
+            alert("Informe o valor do troco.");
+            return;
+        }
+
+        msg = `✅ Pagamento em dinheiro confirmado.<br>Troco para R$ ${valor}`;
+
+    }else{
+
+        msg = `✅ Pagamento em dinheiro confirmado.<br>Sem necessidade de troco`;
+
+    }
+
+    document.getElementById("mensagemConfirmacao").innerHTML = `
+        <div style="margin-top:20px;padding:15px;background:#d4edda;color:#155724;border-radius:8px;font-weight:bold;">
+            ${msg}
+        </div>
+    `;
+}
+
+function confirmarPagamento(){
+
+    document.getElementById("mensagemPagamento").innerHTML = `
+        <div style="margin-top:20px;padding:15px;background:#d4edda;color:#155724;border-radius:8px;font-weight:bold;">
+            ✅ Pagamento informado com sucesso!<br>
+            Aguarde a confirmação do pedido.
+        </div>
+    `;
 }
 
 function copiarPix(){
 
-    let texto =
-    document.getElementById("codigoPix").innerText;
-
+    let texto = document.getElementById("codigoPix").innerText;
     navigator.clipboard.writeText(texto);
-
     alert("Código PIX copiado!");
 }
 
@@ -167,4 +254,3 @@ function copiarPix(){
 
 </body>
 </html>
-```

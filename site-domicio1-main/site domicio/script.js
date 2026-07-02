@@ -81,11 +81,11 @@ document.addEventListener("DOMContentLoaded", function () {
            // Adiciona a marmita personalizada ao carrinho
 let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 
-const quantidade = parseInt(document.getElementById("quantidade").value);
-
+const quantidade = parseInt(document.getElementById("quantidade").value) || 1;
 pedidos.push({
     nome: campos[0].value,
     preco: precos[campos[0].value],
+    quantidade: quantidade,
     arroz: campos[1].value,
     proteina1: campos[2].value,
     proteina2: campos[3].value,
@@ -93,6 +93,8 @@ pedidos.push({
     salada: campos[5].value,
     observacao: observacao
 });
+
+
 
 localStorage.setItem("pedidos", JSON.stringify(pedidos));
 
@@ -199,9 +201,8 @@ if (document.title === "Cadastro") {
 
         let subtotal = 0;
 
-        pedidos.forEach(function(item){
-
-            subtotal += item.preco;
+        pedidos.forEach(function(item, index){
+            subtotal += item.preco * (item.quantidade || 1);
 
            tabela.innerHTML += `
 <tr>
@@ -257,5 +258,33 @@ if (document.title === "Cadastro") {
         };
 
     }
+window.aumentar = function(index){
 
+    let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+    pedidos[index].quantidade = (pedidos[index].quantidade || 1) + 1;
+
+    localStorage.setItem("pedidos", JSON.stringify(pedidos));
+
+    location.reload();
+}
+
+window.diminuir = function(index){
+
+    let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+    if((pedidos[index].quantidade || 1) > 1){
+
+        pedidos[index].quantidade--;
+
+    }else{
+
+        pedidos.splice(index,1);
+
+    }
+
+    localStorage.setItem("pedidos", JSON.stringify(pedidos));
+
+    location.reload();
+}
 });
