@@ -71,15 +71,12 @@ button{
 
 <body>
     
-<div class="opcao">
-    <label>Telefone do cliente:</label><br><br>
-    <input type="tel" id="telefoneCliente" placeholder="Ex: 11999999999">
-</div>
+
 
 <header>
     <h1>Escolha a Forma de Pagamento</h1>
 </header>
-
+<div id="codigoEntrega" style="text-align:center;font-weight:bold;margin:20px;"></div>
 <div class="container">
 
 <!-- PIX -->
@@ -158,9 +155,6 @@ button{
 
 <br><br>
 
-<button onclick="confirmarPagamento()">
-Já realizei o pagamento
-</button>
 
 <div id="mensagemPagamento"></div>
 
@@ -172,6 +166,28 @@ Já realizei o pagamento
 </div>
 
 <script>
+  function confirmarPagamento(){
+
+    let cliente = JSON.parse(localStorage.getItem("clienteAtual"));
+
+    if(cliente){
+        cliente.status = "Em preparação";
+        localStorage.setItem("clienteAtual", JSON.stringify(cliente));
+    }
+
+    // volta direto pra página inicial
+    window.location.href = "index.html";
+}
+
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 3000);
+
+    let cliente = JSON.parse(localStorage.getItem("clienteAtual"));
+
+if(cliente){
+    alert("Seu código de entrega é: " + cliente.codigoEntrega);
+}
 
 function esconderAreas(){
     document.getElementById("pixArea").style.display = "none";

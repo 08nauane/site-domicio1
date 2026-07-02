@@ -33,7 +33,7 @@
 
 <input type="text" id="endereco" placeholder="Endereço" required>
 
-<input type="text" id="informaçoes opcional" placeholder="Informações adicionais(opcional)" required>
+<input type="text" id="informacoes" placeholder="Informações adicionais(opcional)" required>
 
 <button type="submit">Cadastrar</button>
 
@@ -48,20 +48,14 @@ document.getElementById("formCadastro").addEventListener("submit", function(even
 
     event.preventDefault();
 
-    let senha = document.getElementById("senha").value;
-    let confirmarSenha = document.getElementById("confirmarSenha").value;
-
-    if(senha !== confirmarSenha){
-        alert("As senhas não coincidem!");
-        return;
-    }
+    
 
     let cliente = {
         nome: document.getElementById("nome").value,
         email: document.getElementById("email").value,
         telefone: document.getElementById("telefone").value,
         endereco: document.getElementById("endereco").value,
-        senha: senha
+        
     };
 
     // Pega os clientes já cadastrados

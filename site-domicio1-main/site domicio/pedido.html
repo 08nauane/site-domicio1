@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Meu Pedido</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f4f4f4;
+    text-align:center;
+    padding:40px;
+}
+
+.box{
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    width:300px;
+    margin:auto;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Meu Pedido</h2>
+
+    <p id="codigo"></p>
+    <p id="nome"></p>
+    <h3 id="status">Carregando...</h3>
+</div>
+
+<script>
+let cliente = JSON.parse(localStorage.getItem("clienteAtual"));
+
+if(cliente){
+
+    document.getElementById("codigo").innerText =
+        "Código do pedido: " + cliente.codigoPedido;
+
+    document.getElementById("nome").innerText =
+        "Cliente: " + cliente.nome;
+
+    document.getElementById("status").innerText =
+        "Status: " + cliente.status;
+
+}
+</script>
+
+</body>
+</html>
