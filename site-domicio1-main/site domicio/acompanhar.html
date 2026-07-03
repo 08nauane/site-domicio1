@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Acompanhar Pedido</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+.container{
+    max-width:600px;
+    margin:40px auto;
+    background:#fff;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,.15);
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:15px 0;
+    font-size:18px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#28a745;
+    color:white;
+    border:none;
+    font-size:18px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.status{
+    margin-top:30px;
+    text-align:center;
+}
+
+.etapa{
+    padding:15px;
+    margin:10px 0;
+    border-radius:8px;
+    background:#eee;
+}
+
+.ativa{
+    background:#28a745;
+    color:white;
+    font-weight:bold;
+}
+
+.codigo{
+    font-size:22px;
+    color:#d35400;
+}
+
+</style>
+
+</head>
+<body>
+
+<header>
+
+<div class="logo">🍱 Marmitaria Sabor Caseiro</div>
+
+<nav>
+<a href="index.html">Início</a>
+<a href="montar.html">Monte Sua Marmita</a>
+<a href="cadastro.html">Cadastro</a>
+<a href="carrinho.html">Seus Pedidos</a>
+<a href="acompanhar.html">Acompanhar Pedido</a>
+</nav>
+
+</header>
+
+<div class="container">
+
+<h2>Acompanhar Pedido</h2>
+
+<p>Digite os 4 últimos números do telefone.</p>
+
+<input
+type="text"
+id="codigo"
+maxlength="4"
+placeholder="Ex: 1497">
+
+<button onclick="buscarPedido()">
+Consultar Pedido
+</button>
+
+<div class="status" id="resultado"></div>
+
+</div>
+
+<script src="acompanhar.js"></script>
+
+</body>
+</html>
