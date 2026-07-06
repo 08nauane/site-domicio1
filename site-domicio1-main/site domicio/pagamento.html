@@ -154,7 +154,9 @@ button{
 <button onclick="copiarPix()">Copiar Código PIX</button>
 
 <br><br>
-
+<button onclick="confirmarPagamento()">
+    Já realizei o pagamento
+</button>
 
 <div id="mensagemPagamento"></div>
 
@@ -166,23 +168,22 @@ button{
 </div>
 
 <script>
-  function confirmarPagamento(){
+ function perguntarDestino() {
 
-    let cliente = JSON.parse(localStorage.getItem("clienteAtual"));
+    let escolha = confirm(
+        "Pagamento registrado com sucesso!\n\n" +
+        "Clique em OK para acompanhar seu pedido.\n" +
+        "Clique em Cancelar para voltar à página inicial."
+    );
 
-    if(cliente){
-        cliente.status = "Em preparação";
-        localStorage.setItem("clienteAtual", JSON.stringify(cliente));
-    }
-
-    // volta direto pra página inicial
-    window.location.href = "index.html";
-}
-
-    setTimeout(() => {
+    if (escolha) {
+        alert("Você clicou em OK");
+        window.location.href = "acompanhar.html";
+    } else {
+        alert("Você clicou em Cancelar");
         window.location.href = "index.html";
-    }, 3000);
-
+    }
+}
     let cliente = JSON.parse(localStorage.getItem("clienteAtual"));
 
 if(cliente){
@@ -209,14 +210,17 @@ function mostrarTroco(mostrar){
 }
 
 function confirmarOpcao(opcao){
+
     esconderAreas();
 
     document.getElementById("mensagemConfirmacao").innerHTML = `
         <div style="margin-top:20px;padding:15px;background:#d4edda;color:#155724;border-radius:8px;font-weight:bold;">
-            ✅ Forma de pagamento confirmada:<br>
+            ✅ Forma de pagamento confirmada.<br>
             <strong>${opcao}</strong>
         </div>
     `;
+
+    setTimeout(perguntarDestino, 2000);
 }
 
 function confirmarDinheiro(){
@@ -252,9 +256,27 @@ function confirmarDinheiro(){
             ${msg}
         </div>
     `;
+
+    setTimeout(perguntarDestino, 2000);
+
 }
 
+
+
+function copiarPix(){
+
+    let texto = document.getElementById("codigoPix").innerText;
+    navigator.clipboard.writeText(texto);
+    alert("Código PIX copiado!");
+}
 function confirmarPagamento(){
+
+    let cliente = JSON.parse(localStorage.getItem("clienteAtual"));
+
+    if(cliente){
+        cliente.status = "Em preparação";
+        localStorage.setItem("clienteAtual", JSON.stringify(cliente));
+    }
 
     document.getElementById("mensagemPagamento").innerHTML = `
         <div style="margin-top:20px;padding:15px;background:#d4edda;color:#155724;border-radius:8px;font-weight:bold;">
@@ -262,13 +284,8 @@ function confirmarPagamento(){
             Aguarde a confirmação do pedido.
         </div>
     `;
-}
 
-function copiarPix(){
-
-    let texto = document.getElementById("codigoPix").innerText;
-    navigator.clipboard.writeText(texto);
-    alert("Código PIX copiado!");
+    setTimeout(perguntarDestino, 2000);
 }
 
 </script>

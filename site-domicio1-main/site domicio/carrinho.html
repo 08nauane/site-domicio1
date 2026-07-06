@@ -201,16 +201,43 @@ function diminuir(index){
 function finalizarPedido(){
 
     if(pedidos.length == 0){
-
         alert("Seu carrinho está vazio.");
         return;
-
     }
 
+    let cliente = JSON.parse(localStorage.getItem("clienteAtual"));
+
+    if(!cliente){
+        alert("Cadastre-se antes de continuar.");
+        window.location.href = "cadastro.html";
+        return;
+    }
+
+    // cria pedido completo
+    let pedidoCompleto = {
+        cliente: cliente,
+        itens: pedidos,
+        status: "Em preparação",
+        data: new Date().toLocaleString(),
+        codigoEntrega: cliente.codigoEntrega
+    };
+
+    // pega pedidos antigos (histórico)
+    let historico = JSON.parse(localStorage.getItem("historicoPedidos")) || [];
+
+    historico.push(pedidoCompleto);
+
+    localStorage.setItem("historicoPedidos", JSON.stringify(historico));
+
+    // opcional: também salvar o último pedido
+    localStorage.setItem("pedidoAtual", JSON.stringify(pedidoCompleto));
+
+    // limpar carrinho
+    localStorage.removeItem("pedidos");
+
+    // ir para cadastro
     window.location.href = "cadastro.html";
-
 }
-
 function esvaziarCarrinho(){
 
     if(confirm("Deseja esvaziar o carrinho?")){
