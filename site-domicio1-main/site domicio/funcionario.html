@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<title>Área Funcionário</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+
+<header>
+<h1>🍱 Área do Funcionário</h1>
+</header>
+
+
+<div class="container">
+
+<h2>Login Funcionário</h2>
+
+
+<input 
+type="text" 
+id="usuario"
+placeholder="Usuário">
+
+
+<input 
+type="password" 
+id="senha"
+placeholder="Senha">
+
+
+<button onclick="entrar()">
+Entrar
+</button>
+
+
+</div>
+
+
+
+<script>
+
+function entrar(){
+
+let usuario =
+document.getElementById("usuario").value;
+
+
+let senha =
+document.getElementById("senha").value;
+
+
+
+// funcionário padrão
+
+if(usuario=="funcionario" && senha=="1234"){
+
+localStorage.setItem(
+"funcionarioLogado",
+"sim"
+);
+
+
+window.location.href="estoque.html";
+
+
+}else{
+
+alert("Usuário ou senha incorretos");
+
+}
+
+
+}
+
+
+</script>
+
+
+</body>
+</html>

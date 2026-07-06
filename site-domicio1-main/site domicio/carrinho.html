@@ -205,38 +205,31 @@ function finalizarPedido(){
         return;
     }
 
-    let cliente = JSON.parse(localStorage.getItem("clienteAtual"));
 
-    if(!cliente){
-        alert("Cadastre-se antes de continuar.");
-        window.location.href = "cadastro.html";
-        return;
-    }
-
-    // cria pedido completo
+    // cria um pedido temporário sem cliente
     let pedidoCompleto = {
-        cliente: cliente,
         itens: pedidos,
-        status: "Em preparação",
-        data: new Date().toLocaleString(),
-        codigoEntrega: cliente.codigoEntrega
+        status: "Aguardando cadastro",
+        data: new Date().toLocaleString()
     };
 
-    // pega pedidos antigos (histórico)
-    let historico = JSON.parse(localStorage.getItem("historicoPedidos")) || [];
 
-    historico.push(pedidoCompleto);
+    // salva o pedido temporário
+    localStorage.setItem(
+        "pedidoPendente",
+        JSON.stringify(pedidoCompleto)
+    );
 
-    localStorage.setItem("historicoPedidos", JSON.stringify(historico));
 
-    // opcional: também salvar o último pedido
-    localStorage.setItem("pedidoAtual", JSON.stringify(pedidoCompleto));
+    // mensagem de confirmação
+    alert(
+        "Pedido realizado com sucesso!\n\nAgora vamos cadastrar seus dados para finalizar a entrega."
+    );
 
-    // limpar carrinho
-    localStorage.removeItem("pedidos");
 
-    // ir para cadastro
+    // envia para cadastro
     window.location.href = "cadastro.html";
+
 }
 function esvaziarCarrinho(){
 

@@ -82,21 +82,58 @@ document.addEventListener("DOMContentLoaded", function () {
 let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 
 const quantidade = parseInt(document.getElementById("quantidade").value) || 1;
+
+
 pedidos.push({
+
     nome: campos[0].value,
+
     preco: precos[campos[0].value],
+
     quantidade: quantidade,
+
+
     arroz: campos[1].value,
+
     proteina1: campos[2].value,
+
     proteina2: campos[3].value,
+
     acompanhamento: campos[4].value,
+
     salada: campos[5].value,
-    observacao: observacao
+
+
+    observacao: observacao,
+
+
+    // INGREDIENTES PARA O ESTOQUE
+    ingredientes: [
+
+        campos[1].value,      // arroz
+
+        campos[2].value,      // proteína 1
+
+        campos[3].value,      // proteína 2
+
+        campos[4].value,      // acompanhamento
+
+        campos[5].value,      // salada
+
+        "Embalagem"
+
+    ]
+
 });
 
 
+localStorage.setItem(
+    "pedidos",
+    JSON.stringify(pedidos)
+);
 
-localStorage.setItem("pedidos", JSON.stringify(pedidos));
+
+
 
 // Vai para o carrinho
 window.location.href = "carrinho.html";
@@ -179,10 +216,8 @@ if (document.title === "Cadastro") {
                 encodeURIComponent(mensagem);
 
             window.open(link, "_blank");
-            localStorage.removeItem("pedidos");
             localStorage.removeItem("pedido");
-            localStorage.removeItem("tamanhoMarmita");
-
+localStorage.removeItem("tamanhoMarmita");
         });
 
     }
@@ -251,6 +286,15 @@ if (document.title === "Cadastro") {
         alert("Seu carrinho está vazio.");
         return;
     }
+
+    localStorage.setItem(
+    "pedidoPendente",
+    JSON.stringify({
+        itens: pedidos,
+        status:"Aguardando cadastro",
+        data:new Date().toLocaleString()
+    })
+);
 
     // Vai para o cadastro
     window.location.href = "cadastro.html";

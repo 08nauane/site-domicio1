@@ -33,7 +33,7 @@
 
 <input type="text" id="endereco" placeholder="Endereço" required>
 
-<input type="text" id="informacoes" placeholder="Informações adicionais(opcional)" required>
+<input type="text" id="informacoes" placeholder="Informações adicionais(opcional)">
 
 <button type="submit">Cadastrar</button>
 
@@ -48,33 +48,103 @@ document.getElementById("formCadastro").addEventListener("submit", function(even
 
     event.preventDefault();
 
-    
+
+    // Criando o objeto cliente
+    let telefone = document.getElementById("telefone").value;
 
     let cliente = {
         nome: document.getElementById("nome").value,
         email: document.getElementById("email").value,
-        telefone: document.getElementById("telefone").value,
+        telefone: telefone,
         endereco: document.getElementById("endereco").value,
-        
+
+        // pega os 4 últimos números do telefone
+        codigoEntrega: telefone.slice(-4)
     };
 
-    // Pega os clientes já cadastrados
-let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 
-// Adiciona o novo cliente na matriz
-clientes.push(cliente);
+    // Pega clientes já cadastrados
+    let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 
-// Salva a matriz atualizada no navegador
-localStorage.setItem("clientes", JSON.stringify(clientes));
-    alert("Cadastro realizado com sucesso!");
 
-    // Vai para a página de pagamento
-    window.location.href = "pagamento.html";
+    // Adiciona o novo cliente
+    clientes.push(cliente);
+
+
+    // Salva todos os clientes
+    localStorage.setItem(
+        "clientes",
+        JSON.stringify(clientes)
+    );
+
+
+    // Salva cliente atual
+    localStorage.setItem(
+        "clienteAtual",
+        JSON.stringify(cliente)
+    );
+
+
+    // Verifica se existe pedido aguardando cadastro
+    let pedidoPendente = JSON.parse(
+        localStorage.getItem("pedidoPendente")
+    );
+
+
+    if(pedidoPendente){
+
+        // adiciona os dados do cliente no pedido
+        pedidoPendente.cliente = cliente;
+
+        pedidoPendente.codigoEntrega = cliente.codigoEntrega;
+
+        pedidoPendente.status = "Em preparação";
+
+
+        // pega histórico existente
+        let historico = JSON.parse(
+            localStorage.getItem("historicoPedidos")
+        ) || [];
+
+
+        // salva o pedido completo
+        historico.push(pedidoPendente);
+
+
+        localStorage.setItem(
+            "historicoPedidos",
+            JSON.stringify(historico)
+        );
+
+
+        // remove pedido temporário
+        localStorage.removeItem("pedidoPendente");
+
+
+        alert(
+            "Cadastro realizado com sucesso!\n\nSeu pedido foi confirmado!"
+        );
+
+
+        // vai para acompanhar pedido
+        window.location.href = "acompanhar.html";
+
+
+    } else {
+
+
+        alert("Cadastro realizado com sucesso!");
+
+
+        // caso não tenha pedido pendente
+        window.location.href = "index.html";
+
+    }
+
 
 });
 
 </script>
-
 
 <script src="script.js"></script>
 
