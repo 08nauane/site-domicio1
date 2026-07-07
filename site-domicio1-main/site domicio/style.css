@@ -305,3 +305,82 @@ width:90%;
     padding:10px;
     font-size:14px;
 }
+
+/* ===== Monte Sua Marmita ===== */
+
+body{
+    background:#fff8f3;
+}
+
+.formulario{
+    padding:40px 15px;
+}
+
+.formulario h1{
+    text-align:center;
+    color:#ff6b00;
+    margin-bottom:25px;
+    font-size:32px;
+}
+
+.formulario form{
+    max-width:650px;
+    margin:auto;
+    background:#fff;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+}
+
+.formulario label{
+    display:block;
+    margin-top:15px;
+    margin-bottom:6px;
+    font-weight:600;
+    color:#444;
+    font-size:15px;
+}
+
+.formulario select,
+.formulario input,
+.formulario textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #e6e6e6;
+    border-radius:10px;
+    background:#fafafa;
+    font-size:15px;
+    transition:.2s;
+}
+
+.formulario select:focus,
+.formulario input:focus,
+.formulario textarea:focus{
+    outline:none;
+    border-color:#ff6b00;
+    background:#fff;
+    box-shadow:0 0 8px rgba(255,107,0,.15);
+}
+
+.formulario textarea{
+    resize:none;
+    height:90px;
+}
+
+.formulario button{
+    width:100%;
+    margin-top:25px;
+    background:#ff6b00;
+    color:#fff;
+    border:none;
+    padding:14px;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.formulario button:hover{
+    background:#e85f00;
+}

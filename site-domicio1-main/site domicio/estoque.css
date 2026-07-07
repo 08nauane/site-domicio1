@@ -1,0 +1,152 @@
+/* Fonte */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins", sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#fff8f3,#ffeede);
+    color:#333;
+    min-height:100vh;
+}
+
+/* Cabeçalho */
+header{
+    background:#ff6b00;
+    color:#fff;
+    padding:22px;
+    text-align:center;
+    box-shadow:0 4px 12px rgba(255,107,0,.25);
+}
+
+header h1{
+    font-size:2rem;
+    font-weight:600;
+}
+
+/* Container */
+.container{
+    width:90%;
+    max-width:950px;
+    margin:35px auto;
+}
+
+/* Títulos */
+h2{
+    color:#ff6b00;
+    margin:25px 0 15px;
+    font-size:1.3rem;
+    border-left:5px solid #ff6b00;
+    padding-left:12px;
+}
+
+/* Caixas */
+#lista,
+#historico{
+    background:#fff;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    border:1px solid #ffe2cf;
+    min-height:120px;
+    transition:.3s;
+}
+
+#lista:hover,
+#historico:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 24px rgba(255,107,0,.18);
+}
+
+/* Itens do estoque */
+.item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 18px;
+    margin-bottom:12px;
+    background:#fffaf6;
+    border:1px solid #ffd7bf;
+    border-radius:12px;
+    transition:.25s;
+}
+
+.item:hover{
+    background:#fff2e8;
+}
+
+.item:last-child{
+    margin-bottom:0;
+}
+
+/* Nome do produto */
+.item .nome{
+    font-weight:600;
+    color:#333;
+}
+
+/* Quantidade */
+.item .quantidade{
+    background:#ff6b00;
+    color:#fff;
+    padding:6px 14px;
+    border-radius:30px;
+    font-size:.9rem;
+    font-weight:500;
+    box-shadow:0 3px 8px rgba(255,107,0,.25);
+}
+
+/* Histórico */
+.movimento{
+    padding:14px;
+    margin-bottom:12px;
+    border-left:5px solid #ff6b00;
+    background:#fff7f1;
+    border-radius:10px;
+    color:#555;
+    transition:.2s;
+}
+
+.movimento:hover{
+    background:#fff2e8;
+}
+
+/* Barra de rolagem */
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#ff6b00;
+    border-radius:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#ffe8d8;
+}
+
+/* Responsivo */
+@media(max-width:768px){
+
+    header h1{
+        font-size:1.6rem;
+    }
+
+    .container{
+        width:95%;
+    }
+
+    .item{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+
+    .item .quantidade{
+        align-self:flex-end;
+    }
+}

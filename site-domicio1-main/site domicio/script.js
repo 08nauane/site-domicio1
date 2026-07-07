@@ -215,9 +215,17 @@ if (document.title === "Cadastro") {
                 "?text=" +
                 encodeURIComponent(mensagem);
 
-            window.open(link, "_blank");
-            localStorage.removeItem("pedido");
+           window.open(link, "_blank");
+
+// Limpa os dados temporários
+localStorage.removeItem("pedido");
 localStorage.removeItem("tamanhoMarmita");
+
+// Limpa o carrinho automaticamente
+localStorage.removeItem("pedidos");
+localStorage.removeItem("pedidoPendente");
+
+alert("Pedido enviado com sucesso!");
         });
 
     }
@@ -258,7 +266,45 @@ localStorage.removeItem("tamanhoMarmita");
 `;
 
         });
+window.finalizarPedido = function(){
 
+    let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+    if(pedidos.length === 0){
+        alert("Seu carrinho está vazio.");
+        return;
+    }
+
+
+    localStorage.setItem(
+        "pedidoPendente",
+        JSON.stringify({
+            itens: pedidos,
+            status:"Aguardando cadastro",
+            data:new Date().toLocaleString()
+        })
+    );
+
+
+    window.location.href="cadastro.html";
+
+};
+
+
+// Esvaziar carrinho manualmente
+window.esvaziarCarrinho = function(){
+
+    if(confirm("Deseja realmente esvaziar o carrinho?")){
+
+        localStorage.removeItem("pedidos");
+
+        alert("Carrinho esvaziado!");
+
+        location.reload();
+
+    }
+
+};
         document.getElementById("subtotal").innerHTML =
             "R$ " + subtotal.toFixed(2);
 
@@ -268,33 +314,7 @@ localStorage.removeItem("tamanhoMarmita");
         document.getElementById("total").innerHTML =
             "R$ " + (subtotal + taxaEntrega).toFixed(2);
 
-        window.finalizarPedido = function(){
-            window.esvaziarCarrinho = function () {
-
-    if (confirm("Deseja realmente esvaziar o carrinho?")) {
-
-        localStorage.removeItem("pedidos");
-
-        alert("Carrinho esvaziado com sucesso!");
-
-        location.reload();
-    }
-
-};
-
-    if(pedidos.length === 0){
-        alert("Seu carrinho está vazio.");
-        return;
-    }
-
-    localStorage.setItem(
-    "pedidoPendente",
-    JSON.stringify({
-        itens: pedidos,
-        status:"Aguardando cadastro",
-        data:new Date().toLocaleString()
-    })
-);
+        w
 
     // Vai para o cadastro
     window.location.href = "cadastro.html";

@@ -2,46 +2,148 @@
 <html lang="pt-BR">
 
 <head>
-<meta charset="UTF-8">
-<title>Área Funcionário</title>
+    <meta charset="UTF-8">
+    <title>Área do Funcionário</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:"Poppins",sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#fff8f3,#ffe7d3);
+        }
+
+        .login-card{
+            width:380px;
+            background:#fff;
+            border-radius:20px;
+            padding:40px 35px;
+            box-shadow:0 15px 35px rgba(0,0,0,.12);
+            text-align:center;
+        }
+
+        .icone{
+            width:90px;
+            height:90px;
+            margin:0 auto 20px;
+            border-radius:50%;
+            background:#ff6b00;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:42px;
+            color:#fff;
+        }
+
+        h1{
+            color:#ff6b00;
+            margin-bottom:8px;
+            font-size:28px;
+        }
+
+        p{
+            color:#777;
+            margin-bottom:30px;
+            font-size:15px;
+        }
+
+        input{
+            width:100%;
+            padding:14px;
+            margin-bottom:18px;
+            border:1px solid #ddd;
+            border-radius:12px;
+            font-size:15px;
+            transition:.3s;
+        }
+
+        input:focus{
+            outline:none;
+            border-color:#ff6b00;
+            box-shadow:0 0 10px rgba(255,107,0,.2);
+        }
+
+        button{
+            width:100%;
+            padding:14px;
+            border:none;
+            border-radius:12px;
+            background:#ff6b00;
+            color:#fff;
+            font-size:16px;
+            font-weight:600;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        button:hover{
+            background:#e85f00;
+            transform:translateY(-2px);
+        }
+
+        .rodape{
+            margin-top:20px;
+            color:#999;
+            font-size:13px;
+        }
+
+        @media(max-width:450px){
+
+            .login-card{
+                width:92%;
+                padding:30px 25px;
+            }
+
+            h1{
+                font-size:24px;
+            }
+
+        }
+    </style>
 
 </head>
 
 <body>
 
+<div class="login-card">
 
-<header>
-<h1>🍱 Área do Funcionário</h1>
-</header>
+    <div class="icone">🍱</div>
 
+    <h1>Área do Funcionário</h1>
 
-<div class="container">
+    <p>Faça login para acessar o controle de estoque.</p>
 
-<h2>Login Funcionário</h2>
+    <input
+        type="text"
+        id="usuario"
+        placeholder="Usuário">
 
+    <input
+        type="password"
+        id="senha"
+        placeholder="Senha">
 
-<input 
-type="text" 
-id="usuario"
-placeholder="Usuário">
+    <button onclick="entrar()">
+        Entrar
+    </button>
 
-
-<input 
-type="password" 
-id="senha"
-placeholder="Senha">
-
-
-<button onclick="entrar()">
-Entrar
-</button>
-
+    <div class="rodape">
+        Sistema interno da empresa
+    </div>
 
 </div>
-
-
 
 <script>
 
@@ -50,13 +152,8 @@ function entrar(){
 let usuario =
 document.getElementById("usuario").value;
 
-
 let senha =
 document.getElementById("senha").value;
-
-
-
-// funcionário padrão
 
 if(usuario=="funcionario" && senha=="1234"){
 
@@ -65,9 +162,7 @@ localStorage.setItem(
 "sim"
 );
 
-
 window.location.href="estoque.html";
-
 
 }else{
 
@@ -75,12 +170,9 @@ alert("Usuário ou senha incorretos");
 
 }
 
-
 }
 
-
 </script>
-
 
 </body>
 </html>
