@@ -310,18 +310,11 @@ window.esvaziarCarrinho = function(){
 
         document.getElementById("entrega").innerHTML =
             "R$ " + taxaEntrega.toFixed(2);
+document.getElementById("total").innerHTML =
+    "R$ " + (subtotal + taxaEntrega).toFixed(2);
 
-        document.getElementById("total").innerHTML =
-            "R$ " + (subtotal + taxaEntrega).toFixed(2);
+}
 
-        w
-
-    // Vai para o cadastro
-    window.location.href = "cadastro.html";
-
-        };
-
-    }
 window.aumentar = function(index){
 
     let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
@@ -331,7 +324,9 @@ window.aumentar = function(index){
     localStorage.setItem("pedidos", JSON.stringify(pedidos));
 
     location.reload();
-}
+
+};
+
 
 window.diminuir = function(index){
 
@@ -341,7 +336,7 @@ window.diminuir = function(index){
 
         pedidos[index].quantidade--;
 
-    }else{
+    } else {
 
         pedidos.splice(index,1);
 
@@ -350,5 +345,12 @@ window.diminuir = function(index){
     localStorage.setItem("pedidos", JSON.stringify(pedidos));
 
     location.reload();
+
+};
+function escolherMarmita(nome) {
+    localStorage.setItem("marmitaEscolhida", nome);
+
+    window.location.href = "montar.html";
 }
+
 });
