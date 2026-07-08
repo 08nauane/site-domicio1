@@ -207,14 +207,6 @@ if (document.title === "Cadastro") {
                 "\nSalada: " + pedido.salada +
                 "\nObservação: " + pedido.observacao;
 
-            let telefone = "5545998391497";
-
-            let link =
-                "https://wa.me/" +
-                telefone +
-                "?text=" +
-                encodeURIComponent(mensagem);
-
            window.open(link, "_blank");
 
 // Limpa os dados temporários
@@ -236,7 +228,7 @@ alert("Pedido enviado com sucesso!");
 
     if (document.title === "Carrinho - Marmitaria Sabor Caseiro") {
 
-        const taxaEntrega = 8.00;
+        const taxaEntrega = 4.00;
 
         let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 
@@ -247,21 +239,31 @@ alert("Pedido enviado com sucesso!");
         pedidos.forEach(function(item, index){
             subtotal += item.preco * (item.quantidade || 1);
 
-           tabela.innerHTML += `
+tabela.innerHTML += `
 <tr>
-    <td>${item.nome}</td>
-
     <td>
-        <button class="btn-quantidade" onclick="diminuir(${index})">−</button>
+        <strong>${item.nome}</strong>
+    </td>
+    <td>
+        <div class="controle-quantidade">
+            <button class="btn-quantidade"
+                onclick="diminuir(${index})">−</button>
+            <span>${item.quantidade || 1}</span>
+            <button class="btn-quantidade"
+                onclick="aumentar(${index})">+</button>
+        </div>
+    </td>
+    <td class="preco">
+        <strong>
+            R$ ${item.preco.toFixed(2)}
+        </strong>
+        <br>
+        <small>
+            Total: R$ ${(item.preco * (item.quantidade || 1)).toFixed(2)}
+        </small>
 
-        ${item.quantidade || 1}
-
-        <button class="btn-quantidade" onclick="aumentar(${index})">+</button>
     </td>
 
-    <td>
-        R$ ${(item.preco * (item.quantidade || 1)).toFixed(2)}
-    </td>
 </tr>
 `;
 

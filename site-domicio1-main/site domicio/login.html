@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Já sou cliente</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🍱 Marmitaria Sabor Caseiro</div>
+</header>
+
+<section class="formulario">
+
+<h1>Já sou cliente</h1>
+
+<form id="formLogin">
+
+<input
+type="text"
+id="nome"
+placeholder="Nome completo"
+required>
+
+<input
+type="tel"
+id="telefone"
+placeholder="Telefone"
+required>
+
+<button type="submit">
+Entrar
+</button>
+
+</form>
+
+<p style="text-align:center;margin-top:20px;">
+Ainda não possui cadastro?
+<br><br>
+
+<a href="cadastro.html" class="btn">
+Fazer Cadastro
+</a>
+
+</p>
+
+</section>
+
+<script>
+
+document.getElementById("formLogin").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+let nome=document.getElementById("nome").value.trim();
+
+let telefone=document.getElementById("telefone").value.trim();
+
+let clientes=JSON.parse(localStorage.getItem("clientes"))||[];
+
+let cliente=clientes.find(c=>
+
+c.nome.toLowerCase()==nome.toLowerCase() &&
+
+c.telefone==telefone
+
+);
+
+if(!cliente){
+
+alert("Cliente não encontrado.");
+
+return;
+
+}
+
+localStorage.setItem(
+"clienteAtual",
+JSON.stringify(cliente)
+);
+
+let pedido=JSON.parse(localStorage.getItem("pedidoPendente"));
+
+if(pedido){
+
+pedido.cliente=cliente;
+
+pedido.codigoEntrega=cliente.codigoEntrega;
+
+pedido.status="Em preparação";
+
+let historico=
+JSON.parse(localStorage.getItem("historicoPedidos"))||[];
+
+historico.push(pedido);
+
+localStorage.setItem(
+"historicoPedidos",
+JSON.stringify(historico)
+);
+
+localStorage.removeItem("pedidoPendente");
+
+}
+
+alert("Bem-vindo novamente!");
+
+window.location.href="acompanhar.html";
+
+});
+
+</script>
+
+</body>
+</html>
